@@ -22,6 +22,7 @@ export default () => {
   //onChange to update title and price
   return (
     <form onSubmit={onSubmitHandler}>
+      <h1>Product Manager</h1>
       <p>
         <label>
           Title:{" "}
