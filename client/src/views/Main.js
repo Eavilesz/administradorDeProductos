@@ -10,14 +10,18 @@ export default () => {
     axios.get("http://localhost:8000/api/all-products").then((res) => {
       setProduct(res.data.product);
       setLoaded(true);
-      console.log(res.data);
     });
   }, []);
+  const removeFromDom = (productId) => {
+    setProduct(product.filter((product) => product._id !== productId));
+  };
   return (
     <div>
       <ProductForm />
       <hr />
-      {loaded && <ProductList product={product} />}
+      {loaded && (
+        <ProductList product={product} removeFromDom={removeFromDom} />
+      )}
     </div>
   );
 };

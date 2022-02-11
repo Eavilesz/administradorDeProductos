@@ -1,3 +1,4 @@
+const { response, request } = require("express");
 const { Product } = require("../models/product.model");
 
 //Esto es para imprimir todos los documentos de la coleccion
@@ -24,5 +25,19 @@ module.exports.createProduct = (request, response) => {
     description,
   })
     .then((product) => response.json(product))
+    .catch((err) => response.json(err));
+};
+
+module.exports.updateProduct = (request, response) => {
+  Product.findOneAndUpdate({ _id: request.params.id }, request.body, {
+    new: true,
+  })
+    .then((updateProduct) => response.json(updateProduct))
+    .catch((err) => response.json(err));
+};
+
+module.exports.deleteProduct = (request, response) => {
+  Product.deleteOne({ _id: request.params.id })
+    .then((deleteConfirmation) => response.json(deleteConfirmation))
     .catch((err) => response.json(err));
 };
